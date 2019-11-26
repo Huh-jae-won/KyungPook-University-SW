@@ -9,7 +9,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
 int RecursiveBinSearch( int A[], int begin, int end, int target )
 {
   int nMid = 0;
@@ -25,12 +24,10 @@ int RecursiveBinSearch( int A[], int begin, int end, int target )
 }
 
 int add_value_for_binsearch( int A[], int loc, int val )
-                        //       A,   i(ÀÎµ¦½º), tmp(ÀÎµ¦½º¿¡ ÇØ´çÇÏ´Â°ª)
   // assumption: A[0]~A[loc-1] - sorted values
   // find the location of val in A including A[loc]
   // and re-order all the other values as well
 {
-  /* FILL */
   int x;
 //  printf("loc:%d, val:%d ",loc,val);
   if(loc == 0){
@@ -38,8 +35,8 @@ int add_value_for_binsearch( int A[], int loc, int val )
       return loc;
   }
   else {
-        for(x=loc-1 ; x>=0 ; x--){        // loc ¾ÕºÎºÐºÎÅÍ A[0]±îÁö
-            if(x==0){// ÀÎµ¦½º°¡ 0ÀÎ°æ¿ì
+        for(x=loc-1 ; x>=0 ; x--){        // loc ì•žë¶€ë¶„ë¶€í„° A[0]ê¹Œì§€
+            if(x==0){// ì¸ë±ìŠ¤ê°€ 0ì¸ê²½ìš°
                   if(A[0] <= val) {
                         A[1] = val;
                         break;
@@ -55,7 +52,7 @@ int add_value_for_binsearch( int A[], int loc, int val )
                   A[x+1] = A[x];
             }
         }
-        return x+1;  // return°ªÀº ¹è¿­ÀÇ ÀÎµ¦½º
+        return x+1;  // returnê°’ì€ ë°°ì—´ì˜ ì¸ë±ìŠ¤
   }
 }
 
