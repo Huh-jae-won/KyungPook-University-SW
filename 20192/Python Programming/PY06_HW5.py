@@ -1,8 +1,9 @@
+# HW4에서 주소록을 만들었는데 해당 주소록을 address.txt로 저장하고
+# 읽어와 검색하는 프로그램 작성
+# 검색시 로그를 write함
 import os
 import time
 import random
-
-
 
 class Person:
     def __init__(self, name, phone_num):
@@ -59,22 +60,22 @@ def make_stdwrkNum(type):
         return num
 
 
-## main
+## main ##
 addrList=[]
 file_name = input("파일이름을 입력 : ")
 in_file = open(file_name,'r')
-out_file = open('address.log','w')
+out_file = open('address.log','w')                  # address.log에 write할 예정
 
-if os.path.exists(file_name):
+if os.path.exists(file_name):                       # 파일이 read했다면 log 기록
     out_file.write('[' + time.asctime() + '] ')
     out_file.write('open file address.txt\n')
     while True :
         tmp = in_file.readline()
-        addrList.append(tmp.strip('\n'))
+        addrList.append(tmp.strip('\n'))            # 해당줄의 개행을 지운 후 addrList에 추가
         if(tmp == '') :
             break
     out_file.write('[' + time.asctime() + '] ')
-    out_file.write('total 10 people\n')
+    out_file.write('total 10 people\n')             # 10명을 모두 read해왔다면 log 기록
 else:
     print("error %s가 존재하지 않습니다"%file_name)
 in_file.close()
@@ -82,10 +83,10 @@ print(addrList)
 
 while True:
     name = input("찾을사람 이름은?")
-    out_file.write('[' + time.asctime() + '] ')
+    out_file.write('[' + time.asctime() + '] ')     # log 기록
     out_file.write('search '+name+'\n')
-    if name == "끝":
-        out_file.write('[' + time.asctime() + '] ')
+    if name == "끝":                                 # 끝을 입력하면 종료
+        out_file.write('[' + time.asctime() + '] ')  # log 기록
         out_file.write('exit\n')
         out_file.close()
         print("종료합니다")
