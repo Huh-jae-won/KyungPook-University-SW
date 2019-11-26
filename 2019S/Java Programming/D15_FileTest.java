@@ -1,45 +1,45 @@
-
-// ÆÄÀÏ ÀÔÃâ·Â½Ã import ÇÊ¿ä
+// íŒŒì¼ ì…ì¶œë ¥ì„ í•  ë•Œ í•„ìš”í•œ ê²ƒë“¤ì„ ì•Œì•„ë³´ì!
+// íŒŒì¼ ì…ì¶œë ¥ì‹œ import í•„ìš”
 import java.io.*;
 import java.util.*;
 class D15_FileTest{
 	public static void main(String[] args){
-		// ÆÄÀÏ°´Ã¼ »ı¼º(½ÇÁ¦ÆÄÀÏ »ı¼ºx)
-		// ÆÄÀÏ¸í¸¸ ÀÛ¼º : »ó´ë°æ·Î·Î Á¢±Ù(ÇöÀçÀ§Ä¡ ±âÁØ) << º¸Åë »ó´ë°æ·Î »ç¿ëÇÔ
+		// íŒŒì¼ê°ì²´ ìƒì„±(ì‹¤ì œíŒŒì¼ ìƒì„±x)
+		// íŒŒì¼ëª…ë§Œ ì‘ì„± : ìƒëŒ€ê²½ë¡œë¡œ ì ‘ê·¼(í˜„ì¬ìœ„ì¹˜ ê¸°ì¤€) << ë³´í†µ ìƒëŒ€ê²½ë¡œ ì‚¬ìš©í•¨
 		File f1 = new File("D15_File.txt");		
-		// »ó´ë°æ·Î : ÇöÀçÀ§Ä¡´Â »ı·«µÇ¾îÀÖÀ½
+		// ìƒëŒ€ê²½ë¡œ : í˜„ì¬ìœ„ì¹˜ëŠ” ìƒëµë˜ì–´ìˆìŒ
 		File f3 = new File("D15_\\D15_File.txt");
 		
-		// Àı´ë°æ·Î·Î Á¢±Ù(\:Á¦¾î¹®ÀÚ -> \\·Î ÇØÁà¾ßÇÔ)
+		// ì ˆëŒ€ê²½ë¡œë¡œ ì ‘ê·¼(\:ì œì–´ë¬¸ì -> \\ë¡œ í•´ì¤˜ì•¼í•¨)
 		File f2 = new File("D:\\D15_File.txt");
 		
-		// ÀÚ¹Ù´Â ÇÃ·§Æû¿¡ µ¶¸³Àû but ¸®´ª½º¿¡¼± Æú´õ ±¸ºĞÀ» /·Î »ç¿ëÇÔ µû¶ó¼­ \\´Â ÀÎ½ÄÀ» ¸øÇÔ
+		// ìë°”ëŠ” í”Œë«í¼ì— ë…ë¦½ì  but ë¦¬ëˆ…ìŠ¤ì—ì„  í´ë” êµ¬ë¶„ì„ /ë¡œ ì‚¬ìš©í•¨ ë”°ë¼ì„œ \\ëŠ” ì¸ì‹ì„ ëª»í•¨
 		File f4 = new File("D15_" + File.separator + "D15_File.txt");
 		File f5 = new File("D15_");
 		
 		File[] file = {f1,f2,f3,f4,f5};
-		// ÆÄÀÏ ¸Ş¼Òµå
+		// íŒŒì¼ ë©”ì†Œë“œ
 		for(int i=0 ; i< file.length ; i++){
-			System.out.println(i+" : ÀÌ ÆÄÀÏÀÌ ½ÇÀçÇÏ´Â°¡? " + file[i].exists());
+			System.out.println(i+" : ì´ íŒŒì¼ì´ ì‹¤ì¬í•˜ëŠ”ê°€? " + file[i].exists());
 		}
 		System.out.println();
 		for(int i=0 ; i< file.length ; i++){
-			System.out.println(i+" : ÆÄÀÏÀÇ Å©±â : " + file[i].length()+"¹ÙÀÌÆ®");
+			System.out.println(i+" : íŒŒì¼ì˜ í¬ê¸° : " + file[i].length()+"ë°”ì´íŠ¸");
 		}
 		System.out.println();
 		for(int i=0 ; i< file.length ; i++){
-			System.out.println(i+" : ÆÄÀÏ ÀÌ¸§ : "+file[i].getName());
+			System.out.println(i+" : íŒŒì¼ ì´ë¦„ : "+file[i].getName());
 		}
 		System.out.println();
 		for(int i=0 ; i< file.length ; i++){
-			System.out.println(i+" : Æú´õÀÎ°¡  ? "+file[i].isDirectory());
-			System.out.println("Àı´ë°æ·Î ÀÎ°¡ ? "+file[i].isAbsolute());
-			System.out.println("Àı´ë°æ·Î      : "+file[i].getAbsolutePath());
+			System.out.println(i+" : í´ë”ì¸ê°€  ? "+file[i].isDirectory());
+			System.out.println("ì ˆëŒ€ê²½ë¡œ ì¸ê°€ ? "+file[i].isAbsolute());
+			System.out.println("ì ˆëŒ€ê²½ë¡œ      : "+file[i].getAbsolutePath());
 			System.out.println();
 		}
 		System.out.println();
 		for(int i=0 ; i< file.length ; i++){
-			System.out.println( i+" : ÃÖÁ¾¼öÁ¤ÀÏ : " + new Date(file[i].lastModified()) );
+			System.out.println( i+" : ìµœì¢…ìˆ˜ì •ì¼ : " + new Date(file[i].lastModified()) );
 		}
 		
 		
