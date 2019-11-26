@@ -1,16 +1,16 @@
-
+// íŒŒì¼ì„ ì½ì–´ì˜¬ë•Œ í•„ìš”í•œ ê²ƒë“¤ì„ ì•Œì•„ë³´ì!
 import java.util.*;
 import java.io.*;
 
 class D15_InputTest{
 	public static void main(String[] args) throws FileNotFoundException{
 		File f1 = new File("D15_OutputTest.txt");
-		// f°¡ Á¸ÀçÇÑ´Ù¸é ÁøÇà, ¾Æ´Ï¸é Á¾·á
+		// fê°€ ì¡´ì¬í•œë‹¤ë©´ ì§„í–‰, ì•„ë‹ˆë©´ ì¢…ë£Œ
 		if(!f1.exists()){
-			System.out.println(f1.getName()+"ÆÄÀÏÀÌ ¾ø½À´Ï´Ù. ÇÁ·Î±×·¥À» Á¾·áÇÕ´Ï´Ù.");
+			System.out.println(f1.getName()+"íŒŒì¼ì´ ì—†ìŠµë‹ˆë‹¤. í”„ë¡œê·¸ë¨ì„ ì¢…ë£Œí•©ë‹ˆë‹¤.");
 			System.exit(0);
 		}
-		Scanner sc = new Scanner(f1/*¾îµğ¿¡ ¿¬°á?*/);
+		Scanner sc = new Scanner(f1/*ì–´ë””ì— ì—°ê²°?*/);
 		
 		Student[] st = new Student[2];
 		int age; 
@@ -28,8 +28,8 @@ class D15_InputTest{
 			System.out.print(x);
 		}
 		
-		System.out.println("while¹® »ç¿ë");
-		while(sc.hasNext()){	// ÆÄÀÏÀÇ ¶óÀÎ¼ö¸¦ ¸ğ¸£±â ¶§¹®¿¡
+		System.out.println("whileë¬¸ ì‚¬ìš©");
+		while(sc.hasNext()){	// íŒŒì¼ì˜ ë¼ì¸ìˆ˜ë¥¼ ëª¨ë¥´ê¸° ë•Œë¬¸ì—
 
 			System.out.println(sc.nextLine());
 		}
@@ -43,13 +43,13 @@ class Student{
 	private String name;
 	
 	public Student(){
-		this(1000,"µÑ¸®");
+		this(1000,"ë‘˜ë¦¬");
 	}
 	public Student(int age, String name){
 		this.age = age;
 		this.name = name;
 	}
 	public String toString(){
-		return String.format("³ªÀÌ: %4d, ÀÌ¸§: %s\n",age,name);
+		return String.format("ë‚˜ì´: %4d, ì´ë¦„: %s\n",age,name);
 	}
 }
