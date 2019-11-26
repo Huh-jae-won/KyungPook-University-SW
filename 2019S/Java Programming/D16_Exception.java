@@ -1,47 +1,47 @@
-
+// ì˜ˆì™¸ì²˜ë¦¬í•˜ëŠ” ë²•ì„ ì•Œì•„ë³´ì!
 import java.util.*;
 
 class D16_Exception{
 	public static void main(String[] args){
 		try{
 			printAge();
-		}catch(InputMismatchException e){	//¸Ş¼Òµå°¡ ¶°³Ñ±ä ¿¹¿Ü¸¦ ¿©±â¼­ Á÷Á¢ Ã³¸®
+		}catch(InputMismatchException e){	//ë©”ì†Œë“œê°€ ë– ë„˜ê¸´ ì˜ˆì™¸ë¥¼ ì—¬ê¸°ì„œ ì§ì ‘ ì²˜ë¦¬
 			e.printStackTrace();
 		}catch(NegativeAgeException nae){
 			nae.printStackTrace();
 			System.out.println(nae.getMessage());
 		}
-		System.out.println("½ÇÇàÀÌµÉ±î?2");	// trycatch°¡ÀÖ´Ù¸é ¿¹¿Ü°¡ ¹ß»ıÇØµµ ½ÇÇàÀÌ µÈ´Ù.
+		System.out.println("ì‹¤í–‰ì´ë ê¹Œ?2");	// trycatchê°€ìˆë‹¤ë©´ ì˜ˆì™¸ê°€ ë°œìƒí•´ë„ ì‹¤í–‰ì´ ëœë‹¤.
 	}
-	static void printAge() throws InputMismatchException, NegativeAgeException {	// ¼öÇàÇÏ´ø°÷(¿©±â¼± main)À¸·Î ¿¹¿Ü¸¦ Ã³¸®ÇÏµµ·Ï ¶°³Ñ±è
+	static void printAge() throws InputMismatchException, NegativeAgeException {	// ìˆ˜í–‰í•˜ë˜ê³³(ì—¬ê¸°ì„  main)ìœ¼ë¡œ ì˜ˆì™¸ë¥¼ ì²˜ë¦¬í•˜ë„ë¡ ë– ë„˜ê¹€
 		int age;
 		Scanner sc = new Scanner(System.in);
 		
 		try{
-			System.out.print("³ªÀÌ: ");
+			System.out.print("ë‚˜ì´: ");
 			age = sc.nextInt();
-			if(age<0){	//¿¹¿Ü ¹ß»ı½ÃÅ°±â´Â Á¶°Ç
-				throw new NegativeAgeException();	// throws¾Æ´Ô!
-				// throw : JVM¿¡°Ô ¿¹¿Ü°¡ ¹ß»ıµÇ¾ú´Ù°í ¾Ë¸®´Â Å°¿öµå
+			if(age<0){	//ì˜ˆì™¸ ë°œìƒì‹œí‚¤ê¸°ëŠ” ì¡°ê±´
+				throw new NegativeAgeException();	// throwsì•„ë‹˜!
+				// throw : JVMì—ê²Œ ì˜ˆì™¸ê°€ ë°œìƒë˜ì—ˆë‹¤ê³  ì•Œë¦¬ëŠ” í‚¤ì›Œë“œ
 			}
 		
-			System.out.printf("³ªÀÌ(%d)",age);
-		}catch(InputMismatchException ime){		// ¿¹¿Üµµ import ÇØÁà¾ßÇÔ
-			System.out.println("³ªÀÌ¸¦ Á¤¼ö·Î ÀÔ·ÂÇÏ½Ã¿À.");
-			ime.printStackTrace();					// ¿¹¿Ü°¡ ¹ß»ıÇßÀ»¶§ stack»óÈ²Ãâ·Â
+			System.out.printf("ë‚˜ì´(%d)",age);
+		}catch(InputMismatchException ime){		// ì˜ˆì™¸ë„ import í•´ì¤˜ì•¼í•¨
+			System.out.println("ë‚˜ì´ë¥¼ ì •ìˆ˜ë¡œ ì…ë ¥í•˜ì‹œì˜¤.");
+			ime.printStackTrace();					// ì˜ˆì™¸ê°€ ë°œìƒí–ˆì„ë•Œ stackìƒí™©ì¶œë ¥
 			System.out.println(ime.getMessage());	// 
 		}
-		System.out.println("½ÇÇàÀÌµÉ±î?1");		// trycatch°¡ÀÖ´Ù¸é ¿¹¿Ü°¡ ¹ß»ıÇØµµ ½ÇÇàÀÌ µÈ´Ù.
+		System.out.println("ì‹¤í–‰ì´ë ê¹Œ?1");		// trycatchê°€ìˆë‹¤ë©´ ì˜ˆì™¸ê°€ ë°œìƒí•´ë„ ì‹¤í–‰ì´ ëœë‹¤.
 		/*
-		Error : ¸Ş¸ğ¸®ºÎÁ·, Á¤Àü,... ÇØ°áÇÒ ¹æ¹ıÀÌ¾øÀ½ -> ÄÄÆÄÀÏ·¯°¡ ±×³É Åë°ú½ÃÄÑÁÜ
-		RuntimeExcpetion : ÇÁ·Î±×·¡¹Ö ¿À·ù(0À¸·Î³ª´­¶§,NullPointer¿¹¿Ü(½ÇÁ¦ °´Ã¼°¡¾øÀ»¶§),ÀÎµ¦½º¹üÀ§ÃÊ°ú,...) º¸Åë ÄÚµå¸¦ Àß¸øÂ§ °æ¿ì -> ÄÄÆÄÀÏ·¯°¡ °¡¸£ÃÄÁÖÁö¾ÊÀ½(½º½º·Î°íÃÄ¾ßÇÔ)(½ÇÇàÇßÀ»¶§ ¹ß»ıÇÒ¼öÀÖÀ½)
-		³ª¸ÓÁö Exception : ÄÄÆÄÀÏ·¯°¡ Á÷Á¢ °Ë»ç¸¦ ÇØÁÜ, ¿¹¿ÜÃ³¸®¸¦ ÇØÁà¾ßÇÔ
+		Error : ë©”ëª¨ë¦¬ë¶€ì¡±, ì •ì „,... í•´ê²°í•  ë°©ë²•ì´ì—†ìŒ -> ì»´íŒŒì¼ëŸ¬ê°€ ê·¸ëƒ¥ í†µê³¼ì‹œì¼œì¤Œ
+		RuntimeExcpetion : í”„ë¡œê·¸ë˜ë° ì˜¤ë¥˜(0ìœ¼ë¡œë‚˜ëˆŒë•Œ,NullPointerì˜ˆì™¸(ì‹¤ì œ ê°ì²´ê°€ì—†ì„ë•Œ),ì¸ë±ìŠ¤ë²”ìœ„ì´ˆê³¼,...) ë³´í†µ ì½”ë“œë¥¼ ì˜ëª»ì§  ê²½ìš° -> ì»´íŒŒì¼ëŸ¬ê°€ ê°€ë¥´ì³ì£¼ì§€ì•ŠìŒ(ìŠ¤ìŠ¤ë¡œê³ ì³ì•¼í•¨)(ì‹¤í–‰í–ˆì„ë•Œ ë°œìƒí• ìˆ˜ìˆìŒ)
+		ë‚˜ë¨¸ì§€ Exception : ì»´íŒŒì¼ëŸ¬ê°€ ì§ì ‘ ê²€ì‚¬ë¥¼ í•´ì¤Œ, ì˜ˆì™¸ì²˜ë¦¬ë¥¼ í•´ì¤˜ì•¼í•¨
 		*/
 	}
 }
-// »ç¿ëÀÚ Á¤ÀÇ ¿¹¿Ü : ex) À½¼ö³ªÀÌ ¿¹¿Ü -> »ı¼ºÀÚ¸¸ ÀÛ¼º
-class NegativeAgeException extends Exception{	// ¿¹¿Ü Å¬·¡½º
+// ì‚¬ìš©ì ì •ì˜ ì˜ˆì™¸ : ex) ìŒìˆ˜ë‚˜ì´ ì˜ˆì™¸ -> ìƒì„±ìë§Œ ì‘ì„±
+class NegativeAgeException extends Exception{	// ì˜ˆì™¸ í´ë˜ìŠ¤
 	NegativeAgeException(){
-		super("À½¼ö ³ªÀÌ ¿¹¿Ü");	// ¿¹¿Ü Á¤º¸ ÀÛ¼º
+		super("ìŒìˆ˜ ë‚˜ì´ ì˜ˆì™¸");	// ì˜ˆì™¸ ì •ë³´ ì‘ì„±
 	}
 }
