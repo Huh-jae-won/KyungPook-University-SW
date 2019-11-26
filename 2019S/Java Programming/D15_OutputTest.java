@@ -1,5 +1,5 @@
-
-// »ç¿ëÀÚ·ÎºÎÅÍ ³ªÀÌ, ÀÌ¸§ ÀÔ·Â¹Ş±â
+// íŒŒì¼ì„ ì“¸ ë•Œ í•„ìš”í•œ ê²ƒë“¤ì„ ì•Œì•„ë³´ì!
+// ì‚¬ìš©ìë¡œë¶€í„° ë‚˜ì´, ì´ë¦„ ì…ë ¥ë°›ê¸°
 import java.util.*;
 import java.io.*;
 
@@ -7,28 +7,28 @@ class D15_OutputTest{
 	public static void main(String[] args) throws FileNotFoundException{
 		Scanner sc = new Scanner(System.in);
 		File f1 = new File("D15_OutputTest.txt");
-		System.out.println(f1.getName()+" : "+f1.exists());	// Ã³À½¸¸ false
+		System.out.println(f1.getName()+" : "+f1.exists());	// ì²˜ìŒë§Œ false
 		
-		// ½ºÆ®¸² ¿¬°á
-		PrintWriter pw = new PrintWriter(f1/*¾îµğ¿¡ ¿¬°á?*/);	// ÆÄÀÏÀÌ ¾ø´Ù¸é ¸¸µé¾îÁÜ
-		System.out.println(f1.getName()+" : "+f1.exists());	// µû¶ó¼­ true
+		// ìŠ¤íŠ¸ë¦¼ ì—°ê²°
+		PrintWriter pw = new PrintWriter(f1/*ì–´ë””ì— ì—°ê²°?*/);	// íŒŒì¼ì´ ì—†ë‹¤ë©´ ë§Œë“¤ì–´ì¤Œ
+		System.out.println(f1.getName()+" : "+f1.exists());	// ë”°ë¼ì„œ true
 		
 		
-		System.out.print("³ªÀÌ: ");
+		System.out.print("ë‚˜ì´: ");
 		int age = sc.nextInt();
 		sc.nextLine();
-		System.out.print("ÀÌ¸§: ");
+		System.out.print("ì´ë¦„: ");
 		String name = sc.nextLine();
 		
-		// ¸ğ´ÏÅÍ¿¡ Ãâ·Â
-		System.out.printf("³ªÀÌ: %d, ÀÌ¸§: %s\n",age,name);
+		// ëª¨ë‹ˆí„°ì— ì¶œë ¥
+		System.out.printf("ë‚˜ì´: %d, ì´ë¦„: %s\n",age,name);
 		
-		// ÆÄÀÏ¿¡ Ãâ·Â
-		pw.printf("³ªÀÌ : %d, ÀÌ¸§ : %s",age,name);	// À©µµ¿ì¿¡¼­ÀÇ °³Çà : \r\n
+		// íŒŒì¼ì— ì¶œë ¥
+		pw.printf("ë‚˜ì´ : %d, ì´ë¦„ : %s",age,name);	// ìœˆë„ìš°ì—ì„œì˜ ê°œí–‰ : \r\n
 
-		// ¹öÆÛ¿¡ ÀÖ´Â ³»¿ëÀ» ³»º¸³»°Ú´Ù
-		pw.close();	// pw¸¦ ´Ù ¾²°í ÀÌÁ¦ ±×¸¸ ¾²°Ú´Ù.
-		System.out.println("ÆÄÀÏÀ» È®ÀÎÇØº¸¼¼¿ä : "+f1.getAbsolutePath());
+		// ë²„í¼ì— ìˆëŠ” ë‚´ìš©ì„ ë‚´ë³´ë‚´ê² ë‹¤
+		pw.close();	// pwë¥¼ ë‹¤ ì“°ê³  ì´ì œ ê·¸ë§Œ ì“°ê² ë‹¤.
+		System.out.println("íŒŒì¼ì„ í™•ì¸í•´ë³´ì„¸ìš” : "+f1.getAbsolutePath());
 		
 	}
 }
