@@ -1,3 +1,4 @@
+// ì•Œê³ ë¦¬ì¦˜1 ìˆ˜ì—… ê³¼ì œ
 /* Binary search tree using doubly-linked lists
  * COMP319 Algorithms, Fall 2019
  * School of Electronics Engineering, Kyungpook National University
@@ -28,16 +29,10 @@
 //#define BULK_SIZE	65536;
 typedef struct BTNode BTN;
 struct BTNode {
+	// bulkì— keyê°’ì´ ìˆ¨ê²¨ì ¸ ìˆìŒ
 	char bulk[BULK_SIZE];	// null character to be added
 	BTN* left, * right;	// binary tree: left and right children
 };
-
-
-/////////////////////////////////////////////////////////////
-// GIVEN: functions for binary tree node
-// name and parameters only
-// implementations are moved after "main" function
-/////////////////////////////////////////////////////////////
 
 BTN* del_BTN(BTN* current, BTN* before);
 BTN* sorting_left(BTN* before, BTN* head);
@@ -96,12 +91,12 @@ BTN* readkeys_textfile_LHBT(const char infile[], int* pN);
 // FILL 1: generate a binary search tree using insertion
 /////////////////////////////////////////////////////////////
 BTN* insert_to_BST_leaf(BTN* bst, BTN* newPtr)
-//BT¿Í BST´Â ´Ù¸§  -> BST°¡ µÇ¾ß ¹ÙÀÌ³Ê¸® ¼­Ä¡ Æ®¸® ¼ºÁúÀ» ÀÌ¿ë°¡´É
+//BTì™€ BSTëŠ” ë‹¤ë¦„  -> BSTê°€ ë˜ì•¼ ë°”ì´ë„ˆë¦¬ ì„œì¹˜ íŠ¸ë¦¬ ì„±ì§ˆì„ ì´ìš©ê°€ëŠ¥
 {
 	if (bst == NULL) return newPtr;	// new bst as the input node
 	else if (newPtr == NULL) return bst;	// nothing to add
 	else {
-		if (comparekey(bst, newPtr) < 0) { // bst < newPter °æ¿ì
+		if (comparekey(bst, newPtr) < 0) { // bst < newPter ê²½ìš°
 		  /* FILL */
 			if (bst->right != NULL) {
 				insert_to_BST_leaf(bst->right, newPtr);
@@ -125,15 +120,20 @@ BTN* insert_to_BST_leaf(BTN* bst, BTN* newPtr)
 
 BTN* generate_BST_by_insertion(BTN* lhbt)
 {
+	// lhbt : left-half binary tree, ì™¼ìª½ìœ¼ë¡œë§Œ ì •ë ¬ëœ ë°”ì´ë„ˆë¦¬ íŠ¸ë¦¬
+	// lhbtë¥¼ ë°›ì•„ì™€ BST(Binary Search Tree)í˜•íƒœë¡œ ë§Œë“œëŠ” í•¨ìˆ˜
 	/* FILL */
 	BTN* head, * temp;
 	int cnt = 0;
 	head = temp = NULL;
+	// lhbtì˜ ì²«ë…¸ë“œë¥¼ ë–¼ì–´ë‚´ì„œ tempë¡œ 
 	temp = lhbt;
 	lhbt = lhbt->left;
 	temp->left = NULL;
 	temp->right = NULL;
+	
 	if (head == NULL) {
+		// í•´ë‹¹ë…¸ë“œê°€ ì²«ë…¸ë“œì¼ ê²½ìš°
 		head = temp;
 		temp = lhbt;
 		lhbt = lhbt->left;
@@ -142,6 +142,7 @@ BTN* generate_BST_by_insertion(BTN* lhbt)
 		cnt++;
 	}
 	while (1) {
+		// ì²«ë…¸ë“œ ì´í›„ ë¶€í„´ whileë¬¸ì„ í†µí•˜ì—¬ insert_to_BSTí•¨ìˆ˜ë¥¼ ë°˜ë³µ í˜¸ì¶œ
 		cnt++;
 		insert_to_BST_leaf(head, temp);
 		temp = lhbt;
@@ -156,10 +157,8 @@ BTN* generate_BST_by_insertion(BTN* lhbt)
 // FILL 2: PRINT
 /////////////////////////////////////////////////////////////
 int print_LHBT(FILE* fp, BTN* lhbt)
-// prints left-half binary treechar
-// ___-___-___
-// INPUT
-//   fp: file pointer for the output file, stdout for monitor output
+// ë‹¨ìˆœíˆ LHBTë¥¼ ìˆœì„œëŒ€ë¡œ outfileì— write
+// ___-___-___ í˜•íƒœ
 //   lhbt: left-half binary tree (right pointers are all null)
 // RETURNs number of NODES in the list
 {
@@ -184,19 +183,11 @@ int print_LHBT(FILE* fp, BTN* lhbt)
 }
 
 int print_BST_sortedorder(FILE* fp, BTN* bst, int level)
-// bst¸¦ ¿À¸§Â÷¼ø Á¤·Ä
+// bstë¥¼ ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬í•˜ê³  outfileì— write
 // prints a binary search tree nodes by a single line
 // in a SORTED ORDER
-// (hint: inorder traversal)
-// INPUT
-//   fp: file pointer for the output file, stdout for monitor output
-//   bst: root node of the BST, should satisfy the property of
-//      binary search tree, left <= center < right
-//   level: level of the root node, starting from 0 (empty)
-//      if it is unnecessary, do not have to use it
-// RETURNs number of NODES in the list
 {
-	/* GJ: you may fill out the *FILL* lines, or completely rewrite */
+	// ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ì •ë ¬í•´ì•¼í•˜ë¯€ë¡œ ì™¼ìª½ -> ê°€ìš´ë° -> ì˜¤ë¥¸ìª½ ìˆœìœ¼ë¡œ keyê°’ì„ ê°€ì ¸ì˜´
 	int count;	// to count the number of nodes
 	count = 0;
 	int a = 0, b = 0;
@@ -218,7 +209,10 @@ int print_BST_sortedorder(FILE* fp, BTN* bst, int level)
 }
 
 int print_BST_right_center_left(FILE* fp, BTN* bst, int level)
-// prints a binary search tree, rotated by 270 degrees
+// BSTë¥¼ ì™¼ìª½ìœ¼ë¡œ 90ë„ íšŒì „ì‹œì¼œ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
+// 90ë„ íšŒì „ ì‹œì¼°ê¸° ë•Œë¬¸ì— ì˜¤ë¥¸ìª½->ê°€ìš´ë°->ì™¼ìª½ ìˆœìœ¼ë¡œ ì¶œë ¥í•˜ë©´ ë¨
+// ë„ìš°ëŠ” ì¹¸ì„ ë§ì¶°ì¤˜ì•¼í•¨
+// outfileì— write
 // Note: key's length is fixed to KEYLENGTH, so there are
 // (KEYLENGTH+1)*level spaces. For examples,
 //         999
@@ -227,11 +221,6 @@ int print_BST_right_center_left(FILE* fp, BTN* bst, int level)
 // 333
 //     222
 //         111
-// INPUT
-//   (same as print_BST_sortedorder)
-// RETURNs HEIGHT-1 of the printed tree (2 in the above example)
-//   (hint: printing order is right -> center -> left
-//    carefully count the number of spaces)
 {
 	/* FILL */
 	int height = level, a = 0, b = 0;
@@ -242,7 +231,7 @@ int print_BST_right_center_left(FILE* fp, BTN* bst, int level)
 		if (a > height)    height = a;
 		// center node
 		for (int i = 1; i < level; i++) {
-			fprintf(fp, "    ");    // ºóÄ­ 4Ä­
+			fprintf(fp, "    ");    // ë¹ˆì¹¸ 4ì¹¸ (keyê°’ê³¼ ê°™ì€ ê¸¸ì´)
 		}
 		fprintf(fp, "%s\n", getkey(bst));
 		/* FILL: LEFT */
@@ -253,12 +242,8 @@ int print_BST_right_center_left(FILE* fp, BTN* bst, int level)
 }
 
 int print_BST_1(FILE* fp, BTN* bst, int level)
-// prints a binary search tree, rotated by 270 degrees, with less lines
-//  1) center and right are in the same line
-//  2) left subtree is below the center
-//  3) right is connected by '/' and left by '+'
-// Note: key's length is fixed to KEYLENGTH,
-// so left and right begins at (KEYLENGTH+1)*level+1
+// print_BST_right_center_leftí•¨ìˆ˜ì—ì„œ ì˜¤ë¥¸ìª½ë…¸ë“œì™€ ë¶€ëª¨ë…¸ë“œë¥¼ '/'ì„ êµ¬ë¶„ìœ¼ë¡œ ê°™ì€ ë¼ì¸ì— ë°°ì¹˜í•˜ì—¬ outfileì— ì¶œë ¥í•¨
+// ex)
 // 333/777/999
 //        +555
 //    +222
@@ -269,23 +254,21 @@ int print_BST_1(FILE* fp, BTN* bst, int level)
 //            +800
 //                +500/700
 //    +000
-// INPUT and OUPUT
-//   (same as print_BST_right_center_left)
-//   (hint: printing order is center -> right -> left)
 {
 	/* FILL */
 	int height = level, a = 0, b = 0;
 	if (bst != NULL) {
+		// ì¤‘ì•™ -> ì˜¤ë¥¸ìª½ -> ì™¼ìª½ ìˆœìœ¼ë¡œ outfileì— write
 		level++;
 		// center node
 		fprintf(fp, "%s", getkey(bst));
 		if (bst->right != NULL) {
 			fprintf(fp, "/");
 		}
-		/* FILL: RIGHT */
+		/* RIGHT */
 		a = print_BST_1(fp, bst->right, level);
 		if (a > height)    height = a;
-		/* FILL: LEFT */
+		/* LEFT */
 		if (bst->left != NULL) {
 			fprintf(fp, "\n");
 			for (int i = 1; i < 4 * (level); i++) {
@@ -300,37 +283,39 @@ int print_BST_1(FILE* fp, BTN* bst, int level)
 }
 
 int print_BST_2(FILE* fp, BTN* bst, int level, int set[])
+// print_BST_1ì—ì„œ ì™¼ìª½ ìì‹ë…¸ë“œë¥¼ êµ¬ë¶„í•˜ê¸° í¸í•˜ë„ë¡ |ë¥¼ ì¶”ê°€í•´ì¤Œ
 // same as print_BST_1 except vertical line from center to left
 // 100/400/800/900
 //    |       |   +900
 //    |       +800
 //    |           +500/700
 //    +000
-// Hint: stack or some extra variables may help.
 //       static variable can be used as well
 //       You may add additional parameter to the function if necessary
 {
 	/* FILL */
 	int height = level, a = 0, b = 0;
 	if (bst != NULL) {
+		// ì¤‘ì•™ -> ì˜¤ë¥¸ìª½ -> ì™¼ìª½ ìˆœìœ¼ë¡œ outfileì— write
 		level++;
 		// center node
 		fprintf(fp, "%s", getkey(bst));
 		if (bst->right != NULL) {
 			fprintf(fp, "/");
 		}
-		if (bst->left != NULL) set[level] = 1;
-		else    set[level] = 0;
+		if (bst->left != NULL) set[level] = 1;		// ì™¼ìª½ ìì‹ë…¸ë“œê°€ ìˆëŠ” levelì— ë°°ì—´ì„ 1ë¡œ ë‘ 
+		else    set[level] = 0;				// ì™¼ìª½ ìì‹ì´ ìˆìŒì„ ë‚˜íƒ€ë‚´ì–´ í›„ì— |ë¥¼ ì¶œë ¥í•˜ë„ë¡ í•¨
 		/* FILL: RIGHT */
 		a = print_BST_2(fp, bst->right, level, set);
 		if (a > height)    height = a;
 		/* FILL: LEFT */
 		if (bst->left != NULL) {
+			// ì™¼ìª½ ìì‹ë…¸ë“œê°€ ì¡´ì¬í•  ê²½ìš° ì¤„ì„ ë°”ê¿”ì¤˜ì•¼í•¨
 			fprintf(fp, "\n");
 			for (int i = 1; i < 4 * (level); i++) {
-				if (i % 4 == 0 && set[(i / 4)] == 1)  fprintf(fp, "|");
-				else    fprintf(fp, " ");
-			}
+				if (i % 4 == 0 && set[(i / 4)] == 1)  fprintf(fp, "|");		// í‚¤ê¸¸ì´ê°€ ë¹ˆì¹¸4ê°œê¸¸ì´ì´ë‹¤
+				else    fprintf(fp, " ");					// setë°°ì—´ì´ í•´ë‹¹ levelì—ì„œ 1ì´ë¼ë©´
+			}									// |ì„ ì¶œë ¥í•˜ë„ë¡ í•¨
 			fprintf(fp, "+");
 		}
 		set[level] = 0;
@@ -347,7 +332,7 @@ BTN* del_BTN(BTN* current, BTN* before) {
 			before->left = current->right;
 			current->left = current->right = NULL;
 		}
-		else {//before==NULL°æ¿ì
+		else {//before==NULLê²½ìš°
 			tmp = current;
 			return tmp;
 		}
@@ -360,7 +345,7 @@ BTN* del_BTN(BTN* current, BTN* before) {
 }
 
 BTN* sorting_left(BTN* bst,BTN *head) {
-	// bst¸¦ ¿À¸§Â÷¼ø Á¤·Ä
+	// bstë¥¼ ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬
 	BTN *temp, *tail, *before;
 	int cnt=0;
 	while (1) {
@@ -393,29 +378,27 @@ BTN* sorting_left(BTN* bst,BTN *head) {
 }
 
 int find_type(int num,int *left,int *right){
+// complete BSTëŠ” ë…¸ë“œ ê°¯ìˆ˜ë¥¼ ì•ˆë‹¤ë©´ rootì™€ rootì˜ ì™¼ìª½ë…¸ë“œê°¯ìˆ˜, rootì˜ ì˜¤ë¥¸ìª½ë…¸ë“œê°¯ìˆ˜ë¥¼ ì•Œìˆ˜ìˆë‹¤.
+// ë”°ë¼ì„œ rootì˜ ì¢Œìš° ë…¸ë“œ ê°¯ìˆ˜ì— ë”°ë¼ typeì„ ë°˜í™˜í•˜ê³ , ì¢Œìš° ê°¯ìˆ˜ëŠ” ë§¤ê°œë³€ìˆ˜ì— ë‹´ì•„ ë°˜í™˜í•œë‹¤
     int height;
     int num_leaf;
-    height = (int)ceil(log(num+1)/log(2));
-    num_leaf = num - (int)(pow(2,height-1)-1);
+    height = (int)ceil(log(num+1)/log(2));	// ë…¸ë“œê°¯ìˆ˜ê°€ numì¼ë•Œì˜ height
+    num_leaf = num - (int)(pow(2,height-1)-1);	// leafë‹¨ì˜ ë…¸ë“œ ê°¯ìˆ˜
     if(num==1){
         *left=0;
         *right=0;
         return num;
     }
-    if(num_leaf<=(int)pow(2,height-2)){
+    if(num_leaf<=(int)pow(2,height-2)){		// rootì˜ ì˜¤ë¥¸ìª½íŠ¸ë¦¬ê°€ ê½‰ì°¬ê²½ìš°
         *right = (int)pow(2,height-2)-1;
         *left = num-1-*right;
         return 10;
-    }else{
+    }else{					// rootì˜ ì™¼ìª½íŠ¸ë¦¬ê°€ ê½‰ì°¬ê²½ìš°
         *left = (int)pow(2,height-1)-1;
         *right = num-1-*left;
         return 20;
     }
 }
-
-/////////////////////////////////////////////////////////////
-// FILL 3: Conversionsorting_lhbt of an BST to a complete BST
-/////////////////////////////////////////////////////////////
 
 BTN* BST_to_completeBST(BTN* bst, int numNodes, BTN *head)
 {
@@ -424,38 +407,38 @@ BTN* BST_to_completeBST(BTN* bst, int numNodes, BTN *head)
 	lhbt=NULL;
 	int num_l,num_r,type;
 	if(head==NULL)
-        lhbt = sorting_left(bst, lhbt); //LHBT¿À¸§Â÷¼ø ¸¸µë
+        lhbt = sorting_left(bst, lhbt); // ì˜¤ë¦„ì°¨ìˆœì¸ LHBTë¥¼  ë§Œë“¦
     else
         lhbt = bst;
 	root = lhbt;
-	type = find_type(numNodes,&num_l,&num_r);  // numNodes
+	type = find_type(numNodes,&num_l,&num_r);  // numNodesë¥¼ ì´ìš©í•´ rootì˜ ì™¼ìª½íŠ¸ë¦¬, ì˜¤ë¥¸ìª½íŠ¸ë¦¬ ê°¯ìˆ˜ë¥¼ ê°ê° êµ¬í•¨
 	left=root;
 	if(root!=NULL){
         switch(type){
-            case 10 :   // left´Â ´úÂü(h-1), right´Â ´ÙÂü(h-2)
+            case 10 :   // leftëŠ” ëœì°¸(h-1), rightëŠ” ë‹¤ì°¸(h-2)
                 for(int i=0 ; i<numNodes-num_r-1 ; i++){
                     if(i==numNodes-num_r-2){
                         before = root;
                     }
                     root = root->left;
-                }                       // root°ª
+                }                       // rootê°’
                 right = root->left;
-                before->left=NULL;      // leftÀÇ ¸¶Áö¸·À» NULL·Î => root¿Í ¿¬°áÀ» ²÷À½ =>left ¿Ï¼º
-                root->left=NULL;        // right¸¦ root¿ÍÀÇ ¿¬°áÀ» ²÷À½ => root, right ¿Ï¼º
-                //left, root, right ¿Ï¼º
+                before->left=NULL;      // leftì˜ ë§ˆì§€ë§‰ì„ NULLë¡œ => rootì™€ ì—°ê²°ì„ ëŠìŒ =>left ì™„ì„±
+                root->left=NULL;        // rightë¥¼ rootì™€ì˜ ì—°ê²°ì„ ëŠìŒ => root, right ì™„ì„±
+                //left, root, right ì™„ì„±
                 break;
-            case 20 :   // left´Â ´ÙÂü, right´Â ´úÂü (µÑ´Ù ³ôÀÌ h-1)
-                // left °æ¿ì
+            case 20 :   // leftëŠ” ë‹¤ì°¸, rightëŠ” ëœì°¸ (ë‘˜ë‹¤ ë†’ì´ h-1)
+                // left ê²½ìš°
                 for(int i=0 ; i<num_l ; i++ ){
                     if(i==num_l-1){
                         before = root;
                     }
-                    root = root->left;  // root°ª
+                    root = root->left;  // rootê°’
                 }
-                before->left=NULL;      // leftÀÇ ¸¶Áö¸·À» NULL·Î => root¿Í ¿¬°áÀ» ²÷À½ =>left ¿Ï¼º
+                before->left=NULL;      // leftì˜ ë§ˆì§€ë§‰ì„ NULLë¡œ => rootì™€ ì—°ê²°ì„ ëŠìŒ =>left ì™„ì„±
                 right = root->left;     //
-                root->left=NULL;        // right¸¦ root¿ÍÀÇ ¿¬°áÀ» ²÷À½ => root, right ¿Ï¼º
-                //left, root, right ¿Ï¼º
+                root->left=NULL;        // rightë¥¼ rootì™€ì˜ ì—°ê²°ì„ ëŠìŒ => root, right ì™„ì„±
+                //left, root, right ì™„ì„±
                 break;
             case 1 :
                 return root;
@@ -471,7 +454,7 @@ BTN* BST_to_completeBST(BTN* bst, int numNodes, BTN *head)
 }
 
 BTN *pivoting(BTN *head,int type[]){
-    //Á¦ÀÏ À§¿¡³ëµå¸¦ pivotÀ¸·Î ÁÂ¿ì·Î ¹èÄ¡(?)
+    //ì œì¼ ìœ„ì—ë…¸ë“œë¥¼ pivotìœ¼ë¡œ ì¢Œìš°ë¡œ ë°°ì¹˜(?)
     int num_l, num_r, cnt_l=0,cnt_r=0;
     BTN *pivot, *temp, *left, *right, *compare, *l_tail, *r_tail;
     pivot = head;
@@ -485,8 +468,8 @@ BTN *pivoting(BTN *head,int type[]){
         compare->left = NULL;
         int sign = comparekey(pivot,compare);
         if(type[0]==1 || type[0]==2){
-        // °°À»¶© ¿ŞÂÊÀ¸·Î
-            if(sign<0){ // pivot°ª < compare°ª
+        // ê°™ì„ë• ì™¼ìª½ìœ¼ë¡œ
+            if(sign<0){ // pivotê°’ < compareê°’
                 if(right==NULL){
                     right = compare;
                     r_tail = right;
@@ -494,7 +477,7 @@ BTN *pivoting(BTN *head,int type[]){
                     r_tail->left = compare;
                     r_tail = compare;
                 }
-            }else{// compare°ª <= pivot°ª
+            }else{// compareê°’ <= pivotê°’
                 if(left == NULL){
                     left = compare;
                     l_tail = left;
@@ -504,8 +487,8 @@ BTN *pivoting(BTN *head,int type[]){
                 }
             }
         }else if(type[0]==3){
-        // °°À»¶© ¿À¸¥ÂÊÀ¸·Î
-            if(sign<=0){ // pivot°ª <= compare°ª
+        // ê°™ì„ë• ì˜¤ë¥¸ìª½ìœ¼ë¡œ
+            if(sign<=0){ // pivotê°’ <= compareê°’
                 if(right==NULL){
                     right = compare;
                     r_tail = right;
@@ -513,7 +496,7 @@ BTN *pivoting(BTN *head,int type[]){
                     r_tail->left = compare;
                     r_tail = compare;
                 }
-            }else{// pivot°ª > compare°ª
+            }else{// pivotê°’ > compareê°’
                 if(left == NULL){
                     left = compare;
                     l_tail = left;
@@ -523,7 +506,7 @@ BTN *pivoting(BTN *head,int type[]){
                 }
             }
         }else if(type[0] ==0){
-        // ¸ğµç ³ëµå°¡ °°Àº °ªÀÏ ¶§ left,right ¹ø°¥¾Æ°¡¸é¼­ ´Ş¾ÆÁÜ
+        // ëª¨ë“  ë…¸ë“œê°€ ê°™ì€ ê°’ì¼ ë•Œ left,right ë²ˆê°ˆì•„ê°€ë©´ì„œ ë‹¬ì•„ì¤Œ
             if(cnt_l<=cnt_r){
                 if(left == NULL){
                     left = compare;
@@ -546,9 +529,9 @@ BTN *pivoting(BTN *head,int type[]){
                 }
             }
         }else {
-            // pivot°ªÀÌ ¿ŞÂÊ¿¡µµ ¿À¸¥ÂÊ¿¡µµ µé¾î°¡´Â °æ¿ì
+            // pivotê°’ì´ ì™¼ìª½ì—ë„ ì˜¤ë¥¸ìª½ì—ë„ ë“¤ì–´ê°€ëŠ” ê²½ìš°
             find_type(type,&num_l,&num_r);
-            if(sign<0 ){ // pivot°ª < compare°ª
+            if(sign<0 ){ // pivotê°’ < compareê°’
                 if(right==NULL){
                     right = compare;
                     r_tail = right;
@@ -565,7 +548,7 @@ BTN *pivoting(BTN *head,int type[]){
                     r_tail->left = compare;
                     r_tail = compare;
                 }
-            }else{// compare°ª < pivot°ª or <=
+            }else{// compareê°’ < pivotê°’ or <=
                 if(left == NULL){
                     left = compare;
                     l_tail = left;
@@ -619,7 +602,7 @@ BTN* generate_BST_quicksort_advanced(BTN* lhbt,int numNodes)
         cnt_l=0;
         cnt_r=0;
         cnt_same=0;
-        for(;temp!=NULL ; temp=temp->left){// °°À¸¸é ¿ŞÂÊ
+        for(;temp!=NULL ; temp=temp->left){// ê°™ìœ¼ë©´ ì™¼ìª½
             if(comparekey(head,temp)==0){
                 cnt_same++;
             }
@@ -641,13 +624,13 @@ BTN* generate_BST_quicksort_advanced(BTN* lhbt,int numNodes)
                 }
             }
         }
-        // ³²Àº ºÎºĞÀÌ ÀüºÎ °°Àº ¼ıÀÚÀÏ °æ¿ì
+        // ë‚¨ì€ ë¶€ë¶„ì´ ì „ë¶€ ê°™ì€ ìˆ«ìì¼ ê²½ìš°
         if(cnt_same==(cnt_l+cnt_r) && cnt_same!=0 ){
             type[0]=0;
             pivot = pivoting(head,type);
             break;
         }
-        // pivot°ú °°Àº °ªÀº ¿ŞÂÊÀ¸·Î
+        // pivotê³¼ ê°™ì€ ê°’ì€ ì™¼ìª½ìœ¼ë¡œ
         if(cnt_l==num_l && cnt_r==num_r){
             type[0]=2;
             pivot = pivoting(head,type);
@@ -657,7 +640,7 @@ BTN* generate_BST_quicksort_advanced(BTN* lhbt,int numNodes)
         cnt_r=0;
         cnt_same=0;
         temp=head->left;
-        for(;temp!=NULL ; temp=temp->left){// °°À¸¸é ¿À¸¥ÂÊ
+        for(;temp!=NULL ; temp=temp->left){// ê°™ìœ¼ë©´ ì˜¤ë¥¸ìª½
             if(comparekey(head,temp)==0){
                 cnt_same++;
             }
@@ -667,12 +650,12 @@ BTN* generate_BST_quicksort_advanced(BTN* lhbt,int numNodes)
                 cnt_r++;
             }
         }
-        // head¿Í °ªÀÌ °°Àº°ÍÀÌ ¿©·¯°³ÀÖ°í, ÁÂ¿ì·Î ³ª´¶°æ¿ì
+        // headì™€ ê°’ì´ ê°™ì€ê²ƒì´ ì—¬ëŸ¬ê°œìˆê³ , ì¢Œìš°ë¡œ ë‚˜ë‰œê²½ìš°
         if((cnt_l+type[1]==num_l)&&(cnt_r-cnt_same+type[2]==num_r)){
             pivot=pivoting(head,type);
             break;
         }
-        // pivot°ú °°Àº °ªÀº ¿À¸¥ÂÊ
+        // pivotê³¼ ê°™ì€ ê°’ì€ ì˜¤ë¥¸ìª½
         if(cnt_l==num_l && cnt_r==num_r){
             type[0]=3;
             pivot = pivoting(head,type);
@@ -782,7 +765,7 @@ int main()
 		fprintf(fp, "\nComplete BST height %d\n", lev);
 		fprintf(fp, "=====================================\n");
 
-		//2´Ü°è : BST using quick sort, pivot as left, basic
+		//2ë‹¨ê³„ : BST using quick sort, pivot as left, basic
 		bst2 = generate_BST_quicksort_basic(copy_bt_recursive(root));
 		lev = print_BST_2(fp, bst2, 0, set);
 		fprintf(fp, "\nBST by QUICKSORT, height %d\n", lev);
