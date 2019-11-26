@@ -1,3 +1,5 @@
+// ì•Œê³ ë¦¬ì¦˜1 ìˆ˜ì—…ì˜ ê³¼ì œ
+// ë°°ì—´ì„ ì´ìš©í•œ sorting
 /* Directions: complete the code by filling in "FILL" parts
  *   adding functions and variables is allowed
  *   do not change print and file load/save
@@ -13,10 +15,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-/////////////////////////////////////////////////////////////
-// common functions for handling arrays
-/////////////////////////////////////////////////////////////
 void print( long A[], int N )
 {
   int i;
@@ -95,9 +93,7 @@ void savekeys_textfile( const char outfile[], long A[], int N )
   }
 }
 
-/////////////////////////////////////////////////////////////
-// insertion sort: GJ - already given
-/////////////////////////////////////////////////////////////
+// insertion sort: GJ
 void insertion_sort( long A[], int N )
 {
   int i, j;
@@ -109,49 +105,38 @@ void insertion_sort( long A[], int N )
   }
 }
 
-
-
-
-/////////////////////////////////////////////////////////////
 // merge sort
-/////////////////////////////////////////////////////////////
-/* GJ: may add any additional functions */
-
 // A: arrays to be sorted, and to store output (fully sorted)
 // Tmp: temporary space, size is at least right-left+1
 void merge(long A[], long Tmp[], int left, int mid, int right){
-      int l = left;     // ¿ŞÂÊ Á¤·Ä ½ÃÀÛÁ¡
-      int m = mid+1;    // ¿À¸¥ÂÊ Á¤·Ä ½ÃÀÛÁ¡
+      int l = left;     // ì™¼ìª½ ì •ë ¬ ì‹œì‘ì 
+      int m = mid+1;    // ì˜¤ë¥¸ìª½ ì •ë ¬ ì‹œì‘ì 
       int k = left;
       int t;
+	// ì¤‘ì•™ì„ ê¸°ì¤€ìœ¼ë¡œ ë‘ë°°ì—´ì˜ í¬ê¸°ë¥¼ ë¹„êµí•˜ì—¬ ì‘ì€ê²ƒì„ Tmpë°°ì—´ì— ë‹´ëŠ”ë‹¤
       while(l<=mid && m<=right){
-            // ¿ŞÂÊÀÌ Å«°æ¿ì
+            // ì™¼ìª½ì´ í°ê²½ìš°
             if(A[l]>A[m]){
-                  Tmp[k]=A[m];
-                  k++;
-                  m++;
+                  Tmp[k++]=A[m++];
             }
-            // ¿À¸¥ÂÊÀÌ Å«°æ¿ì
+            // ì˜¤ë¥¸ìª½ì´ í°ê²½ìš°
             else{
-                  Tmp[k]=A[l];
-                  k++;
-                  l++;
+                  Tmp[k++]=A[l++];
             }
       }
-      // ¿À¸¥ÂÊÀÌ ³²Àº°æ¿ì
+      // í•œìª½ ë°°ì—´ì´ ëë‚œ í›„ 
+      // ì˜¤ë¥¸ìª½ì´ ë‚¨ì€ê²½ìš°
       if(l>mid){
             for(t=m ; t<=right ; t++){
-                  Tmp[k] = A[t];
-                  k++;
+                  Tmp[k++] = A[t];
             }
       }else {
-      // ¿ŞÂÊÀÌ ³²Àº °æ¿ì
+      // ì™¼ìª½ì´ ë‚¨ì€ ê²½ìš°
             for(t=l ; t<=mid ; t++){
-                  Tmp[k] = A[t];
-                  k++;
+                  Tmp[k++] = A[t];
             }
       }
-      //tmp°ªÀ» A·Î
+      //tmpê°’ì„ Aë¡œ
       for(t=left ; t<=right ; t++){
             A[t] = Tmp[t];
       }
@@ -192,7 +177,7 @@ int main()
   scanf("%s",infile);
   printf("Output file name? ");
   scanf("%s",outfile);
-
+  // 1ë²ˆ : insertion sorting, 2ë²ˆ : merge sorting
   printf("Method (1: insertion, 2: merge)? ");
   scanf("%d",&method);
 
@@ -232,5 +217,5 @@ int main()
     free(A);
   }
 
-  return 0;
+  return 0; 
 }
