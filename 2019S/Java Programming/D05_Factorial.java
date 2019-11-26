@@ -1,4 +1,5 @@
-// n!±¸ÇÏ±â, OverFlowÀÏ¶§ n±¸ÇÏ±â
+// n!êµ¬í•˜ê¸°
+// OverFlowê°€ ë°œìƒí•œë‹¤ë©´ ì´ì „ê¹Œì§€ì˜ nê°’ êµ¬í•˜ê¸°
 import java.util.*;
 class D05_Factorial {
 	public static void main(String[] args){
@@ -7,16 +8,17 @@ class D05_Factorial {
 		int result = 1;
 		int buf = 0;
 		
-		System.out.print("Á¤¼ö ÀÔ·Â : ");
+		System.out.print("ì •ìˆ˜ ì…ë ¥ : ");
 		n = sc.nextInt();
 		for(int i = 2 ; i <= n ; i++){
+			// ì…ë ¥ë°›ì€ ìˆ«ì n ê¹Œì§€ ì˜ ê³„ìŠ¹ì„ êµ¬í•¨
 			buf = result;
 			result *= i;
 			System.out.printf("%2d : buf : %10d, result : %10d\n",i,buf,result);
 			if((result/buf)!=i){
-				System.out.println("Overflow¹ß»ı! ¹ß»ıÇÑ À§Ä¡´Â nÀÌ "+(i+1)+"ÀÏ¶§");
-				System.out.println("Overflow¹ß»ıÀü ±îÁöÀÇ °á°ú ");
-				System.out.print("n = "+i+"ÀÏ¶§ ");
+				System.out.println("Overflowë°œìƒ! ë°œìƒí•œ ìœ„ì¹˜ëŠ” nì´ "+(i+1)+"ì¼ë•Œ");
+				System.out.println("Overflowë°œìƒì „ ê¹Œì§€ì˜ ê²°ê³¼ ");
+				System.out.print("n = "+i+"ì¼ë•Œ ");
 				break;
 			}
 		}
