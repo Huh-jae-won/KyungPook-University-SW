@@ -1,18 +1,16 @@
+// ìƒì†ì˜ ì¥ì ì„ 
+/* ìƒì†ì˜ ì¥ì 
+	ìì‹ë“¤ì˜ í´ë˜ìŠ¤ë¥¼ ê°™ì€ ìë£Œí˜•ìœ¼ë¡œ ë§Œë“¤ì–´ ë°°ì—´ë¡œ ë§Œë“¤ìˆ˜ ìˆë‹¤!!
 
-/* »ó¼ÓÀÇ ÀåÁ¡2
-	ÀÚ½ÄµéÀÇ Å¬·¡½º¸¦ °°Àº ÀÚ·áÇüÀ¸·Î ¸¸µé¾î ¹è¿­·Î ¸¸µé¼ö ÀÖ´Ù.!!
-
-
-	ÁöÈÖ°¡°¡ ¿¬ÀÚÁÖµé¿¡°Ô ÁöÈÖÇÔ
-	Å¬·¡½º : ÁöÈÖÀÚ
-		conduct(¿¬ÁÖÀÚµé) : ¸Å°³º¯¼ö¸¦ ÁöÈÖÇÔ
-		
-	Å¬·¡½º : ÇÇ¾Æ´Ï½ºÆ®
-		play() : ÇÇ¾Æ³ë¸¦ ¿¬ÁÖ
-	Å¬·¡½º : Ã¿¸®½ºÆ®
-		play() : Ã¿·Î¸¦ ¿¬ÁÖ
-	Å¬·¡½º : ¹ÙÀÌ¿Ã¸°
-		play() : ¹ÙÀÌ¿Ã¸°À» ¿¬ÁÖ
+	ì§€íœ˜ê°€ê°€ ì—°ìì£¼ë“¤ì—ê²Œ ì§€íœ˜í•¨
+	í´ë˜ìŠ¤ : ì§€íœ˜ì
+		conduct(ì—°ì£¼ìë“¤) : ë§¤ê°œë³€ìˆ˜ë¥¼ ì§€íœ˜í•¨
+	í´ë˜ìŠ¤ : í”¼ì•„ë‹ˆìŠ¤íŠ¸
+		play() : í”¼ì•„ë…¸ë¥¼ ì—°ì£¼
+	í´ë˜ìŠ¤ : ì²¼ë¦¬ìŠ¤íŠ¸
+		play() : ì²¼ë¡œë¥¼ ì—°ì£¼
+	í´ë˜ìŠ¤ : ë°”ì´ì˜¬ë¦°
+		play() : ë°”ì´ì˜¬ë¦°ì„ ì—°ì£¼
 */
 class D14_PolyProblem2{
 	public static void main(String[] args){
@@ -23,7 +21,9 @@ class D14_PolyProblem2{
 		Player v1 = new Violinist();
 		Player v2 = new Violinist();
 		Player v3 = new Violinist();
+		// ì§€íœ˜ì 1ëª…ê³¼ ì—¬ëŸ¬ëª…ì˜ ì—°ì£¼ìë¥¼ ìƒì„±
 		
+		// Playerì´ê¸° ë•Œë¬¸ì— í•œ ë°°ì—´ì— ëª¨ë“  ì—°ì£¼ìë¥¼ ë‹´ì„ ìˆ˜ ìˆë‹¤.
 		Player[] p = {p1,p2,c1,v1,v2,v3};
 		
 		c.conduct(p);
@@ -33,7 +33,7 @@ class D14_PolyProblem2{
 class Conductor{
 	void conduct(Player[] p){
 		for(Player x : p){
-			System.out.printf( "%s°¡ %sµéÀ» ÁöÈÖÇÕ´Ï´Ù.\n",this.getClass().getName(),x.getClass().getName() );
+			System.out.printf( "%sê°€ %së“¤ì„ ì§€íœ˜í•©ë‹ˆë‹¤.\n",this.getClass().getName(),x.getClass().getName() );
 			x.play(x.getClass().getName());
 		}
 	}
@@ -42,15 +42,15 @@ class Conductor{
 
 class Player{
 	void play(String s){
-		System.out.printf("%sÀ»(¸¦) ¿¬ÁÖÇÕ´Ï´Ù\n",s);
+		System.out.printf("%sì„(ë¥¼) ì—°ì£¼í•©ë‹ˆë‹¤\n",s);
 	}
 }
-class Pianist extends Player{
-	String instrument = "ÇÇ¾Æ³ë";
+class Pianist extends Player{		// Playerë¥¼ ìƒì†í•¨
+	String instrument = "í”¼ì•„ë…¸";
 }
-class Cellist extends Player{
-	String instrument = "Ã¿·Î";
+class Cellist extends Player{		// Playerë¥¼ ìƒì†í•¨
+	String instrument = "ì²¼ë¡œ";
 }
-class Violinist extends Player{
-	String instrument = "¹ÙÀÌ¿Ã¸°";
+class Violinist extends Player{		// Playerë¥¼ ìƒì†í•¨
+	String instrument = "ë°”ì´ì˜¬ë¦°";
 }
