@@ -1,3 +1,4 @@
+// insertion, merge sorting using linkedlist
 /* Directions: complete the code by filling in "FILL" parts
  *   adding functions and variables is allowed
  *   do not change print and file load/save
@@ -13,10 +14,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-/////////////////////////////////////////////////////////////
-// common functions for handling arrays
-/////////////////////////////////////////////////////////////
 long *readkeys_textfile( const char infile[], int *pN )
   // returns an array of long integers, with its size stored in
   // the memory indicated by integer pointer variable pN
@@ -60,9 +57,6 @@ long *readkeys_textfile( const char infile[], int *pN )
   }
 }
 
-/////////////////////////////////////////////////////////////
-// functions for handling linked lists
-/////////////////////////////////////////////////////////////
 struct LNode {	// update: item type chagned to long, variable name to key
   long key;
   struct LNode *next;
@@ -93,7 +87,7 @@ struct LNode *insert_next(struct LNode *prev, struct LNode *newPtr)
   if ( newPtr == NULL ) return prev;	// Nothing to add
   else if ( prev == NULL ) return insert_head(NULL, newPtr);
   else {
-    //cur = prev->next;	// unnecessary, so removed, on 190924
+    //cur = prev->next;		// unnecessary, so removed, on 190924
     //newPtr->next = cur;	// unnecessary, so removed, on 190924
     newPtr->next = prev->next;
     prev->next=newPtr;
@@ -120,9 +114,7 @@ void free_list_iterative (struct LNode *L)
   }
 }
 
-/////////////////////////////////////////////////////////////
 // read a linked list from textfile
-/////////////////////////////////////////////////////////////
 struct LNode *array2linkedlist(long A[], int N)
 {
   struct LNode *head, *cur, *prev;
@@ -222,10 +214,7 @@ struct LNode *list_insertion_sort (struct LNode *ptr, int size,int method ){
 
 
 
-/////////////////////////////////////////////////////////////
 // linked list merge sort
-/////////////////////////////////////////////////////////////
-/* GJ: may add any additional functions */
 struct LNode *list_array_merge_sort( struct LNode **head_array, int N,int method)
 {
       int i, j=N-1, k, size, cnt=2, set;
@@ -311,7 +300,7 @@ int main()
   scanf("%s",infile);
   printf("Output file name? ");
   scanf("%s",outfile);
-
+  
   printf("Method (1: insertion, 2: merge)? ");
   scanf("%d",&method);
 
@@ -322,7 +311,7 @@ int main()
 
   if ( head != NULL ) {
     // print all if not too many
-    if ( numElements < 100 )	// GJ: comment out this line to always display
+    if ( numElements < 100 )	
     {
       traverse(head);
       printf("%d Loaded\n", numElements);
