@@ -1,6 +1,6 @@
-
+// ë©”ì†Œë“œ ì¤‘ë³µì •ì˜ ì•Œì•„ë³´ê¸°
 class OverRiding{
-	//¸Ş¼Òµå ¿À¹ö¶óÀÌµù : ¸Ş¼Òµå ½Ã±×´ÏÃ³¸¸ ´Ù¸£¸é Áßº¹Á¤ÀÇ°¡ °¡´ÉÇÏ´Ù!!
+	//ë©”ì†Œë“œ ì˜¤ë²„ë¼ì´ë”© : ë©”ì†Œë“œ ì‹œê·¸ë‹ˆì²˜ë§Œ ë‹¤ë¥´ë©´ ì¤‘ë³µì •ì˜ê°€ ê°€ëŠ¥í•˜ë‹¤!!
 	int sum(int a, int b){
 		int i = a+b;
 		return i;
@@ -9,7 +9,7 @@ class OverRiding{
 		int i = a+b+c;
 		return i;
 	}
-/*	¹İÈ¯ Å¸ÀÔ¸¸ ´Ù¸¥°ÍÀº Áßº¹Á¤ÀÇ ºÒ°¡´É!!
+/*	ë°˜í™˜ íƒ€ì…ë§Œ ë‹¤ë¥¸ê²ƒì€ ì¤‘ë³µì •ì˜ ë¶ˆê°€ëŠ¥!!
 	void sum(int a, int b){
 		...
 	}
@@ -23,9 +23,8 @@ class OverRiding{
 public class D10_OverRiding{
 	public static void main(String[] args){
 		OverRiding or = new OverRiding();
-		// Á»´õ ¾Ë¸ÂÀº ¸Ş¼Òµå¸¦ »ç¿ëÇÔ ¿©±â¼­´Â int sumÀ» »ç¿ë
-		System.out.printf("1+2 = %d\n",or.sum(1,2));
-		
-		
+		// ì¢€ë” ì•Œë§ì€ ë©”ì†Œë“œë¥¼ ì‚¬ìš©í•¨ ì—¬ê¸°ì„œëŠ” int sumì„ ì‚¬ìš©
+		System.out.printf("1+2 = %d\n",or.sum(1,2));		// int sum(int a, int b)ë¥¼ ì‚¬ìš©í•¨
+		System.out.printf("1+2+3 = %d\n",or.sum(1,2,3));	// int sum(int a, int b, int c)ë¥¼ ì‚¬ìš©í•¨
 	}
 }

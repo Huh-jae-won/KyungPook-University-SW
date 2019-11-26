@@ -1,13 +1,16 @@
+// ì ‘ê·¼ì ì„¤ì •ì ë§Œë“¤ì–´ë³´ê¸°
+// privateìœ¼ë¡œ ì„¤ì •ëœ ìë£Œ ì•Œì•„ë³´ê¸°
+
 import java.util.*;
 class Car{
-	// ÇÊµå´Â privateÀ¸·Î -> ¿ÜºÎ¿¡¼­ º¯°æ ºÒ°¡´É ÇÏµµ·Ï
-	// private : ÇØ´ç Å¬·¡½º ¾È¿¡¼­¸¸ »ç¿ë°¡´É
+	// í•„ë“œëŠ” privateìœ¼ë¡œ -> ì™¸ë¶€ì—ì„œ ë³€ê²½ ë¶ˆê°€ëŠ¥ í•˜ë„ë¡
+	// private : í•´ë‹¹ í´ë˜ìŠ¤ ì•ˆì—ì„œë§Œ ì‚¬ìš©ê°€ëŠ¥
 	private String type;
 	private String color;
 	private int speed;
 	
 	void setColor(String color){
-		this.color = color;	//this. : ÇØ´ç ÇÊµå
+		this.color = color;	//this. : í•´ë‹¹ í•„ë“œ
 	}
 	String getColor(){
 		return color;
@@ -41,18 +44,18 @@ class D10_GetSet{
 		Car car1 = new Car();
 		Car car2 = new Car();
 		int n;
-		// c.color = "³ë¶û"; privateÀÌ±â ¶§¹®¿¡ ¿ÜºÎ¿¡¼­ »ç¿ë ºÒ°¡´É
-		// µû¶ó¼­ ¿ÜºÎ¿¡¼­ »ç¿ëÇÒ¼ö ÀÖµµ·Ï ¼³Á¤ÀÚ Á¢±ÙÀÚ¸¦ ÀÌ¿ë
-		car1.setColor("³ë¶û");
+		// c.color = "ë…¸ë‘"; privateì´ê¸° ë•Œë¬¸ì— ì™¸ë¶€ì—ì„œ ì‚¬ìš© ë¶ˆê°€ëŠ¥
+		// ë”°ë¼ì„œ ì™¸ë¶€ì—ì„œ ì‚¬ìš©í• ìˆ˜ ìˆë„ë¡ ì„¤ì •ì ì ‘ê·¼ìë¥¼ ì´ìš©
+		car1.setColor("ë…¸ë‘");
 		car1.setType("SUV");
 		car1.setSpeed(100);
-		System.out.println("car1ÀÇ »ö : "+car1.getColor());
-		System.out.println("car1ÀÇ Á¾ : "+car1.getType());
-		System.out.println("car1ÀÇ¼Óµµ : "+car1.getSpeed());
-		System.out.print("¼ÓµµÁõ°¨À» ÀÔ·ÂÇÏ½Ã¿À");
+		System.out.println("car1ì˜ ìƒ‰ : "+car1.getColor());
+		System.out.println("car1ì˜ ì¢… : "+car1.getType());
+		System.out.println("car1ì˜ì†ë„ : "+car1.getSpeed());
+		System.out.print("ì†ë„ì¦ê°ì„ ì…ë ¥í•˜ì‹œì˜¤");
 		n = sc.nextInt();
 		car1.speedUp(n);
-		System.out.println("car1ÀÇ¼Óµµ : "+car1.getSpeed());
+		System.out.println("car1ì˜ì†ë„ : "+car1.getSpeed());
 		
 	}
 }
