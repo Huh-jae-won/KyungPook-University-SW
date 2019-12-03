@@ -70,6 +70,8 @@ int main(){
     double (*rlt)[2] = result;
 
     for(int x=0 ; x<numOfitem+1 ; x++){
+        // 각 물건 마다 절반으로 나누는 경우에 대해 kanpsack문제를 풀어 그중 최대value값을 찾으면 되므로 for문을 통해 numOfitem수만큼 반복
+        // x가 0일땐 1번 문제와 동일(아무 물건도 나누기2를 안한상태)
         itemPtr[x][0] /= 2;
         itemPtr[x][1] /= 2;
 
@@ -103,7 +105,8 @@ int main(){
             }
         }
         find_item(valuePtr,itemPtr,max_weight,numOfitem);
-        // 원상복귀
+        // 원상복귀 : 다음 수를 절반으로 나누어 똑같이 수행 해야하므로 
+        //           현재 수는 다시 2배를 해 원래값으로 돌려줌
         itemPtr[x][0] *= 2;
         itemPtr[x][1] *= 2;
         for(int i=1 ; i<numOfitem+1 ; i++){
@@ -146,6 +149,8 @@ double* make_value_arr(double (*value)[numOfitem+1], double (*item)[2], int max_
 
 
 void find_item(double (*valuePtr)[numOfitem+1], double (*itemPtr)[2], int weight, int i){
+    // 완성된 value배열에서 최대value에 맞는 물건들을 찾는 과정
+    // 가장 value배열의 가장 끝부터 시작하여 역추적해 나감
     if( valuePtr[weight][i]!=0){
         if( valuePtr[weight][i-1]==valuePtr[weight][i] ){
             find_item(valuePtr, itemPtr, weight, i-1);
