@@ -2,6 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+
+// knapsack problem
+// Dynamic Programming을 활용하는 문제
+// 1번 문제와 조금 다름 : 이문제는 1번문제에서 딱한번 한 물건을 weight를 2배, value도 2배로 두고 knapsack문제를 푸는것이다
+// 물론 1번문제방식이 가장 큰값이라면 똑같이 출력을 하면됨
+
+// 2배하는 것은 int형을 사용해도 무방하므로 다시 int형으로 바꿈
 static int result[20][2];
 static int numOfitem;
 int save_file(char outfile[], int (*result)[2]);
@@ -38,6 +45,7 @@ int main(){
     }while( tmp!=-1 );
     tmp=0;
     if(cnt%2!=0){
+        // input의 숫자는 -1까지 짝수개 이므로 홀수개가 입력되었으면 오류 설명후 종료
         fprintf(stderr,"error) # of products and # of values are not matched\n");
         return -2;
     }
@@ -47,7 +55,7 @@ int main(){
     int item[numOfitem+1][2];
     int value[max_weight+1][numOfitem+1];
 
-    // item�迭 ����
+    // item배열 생성 : 1번문제와 동일
     item[0][0] = 0;
     item[0][1] = 0;
     for(int i=1 ; i<numOfitem+1 ; i++){
@@ -65,15 +73,18 @@ int main(){
     int (*rlt)[2] = result;
 
     for(int x=0 ; x<numOfitem+1 ; x++){
+        // 각 물건 마다 2배를 한 경우에 대해 kanpsack문제를 풀어 그중 최대value값을 찾으면 되므로 for문을 통해 numOfitem수만큼 반복
+        // x가 0일땐 1번 문제와 동일(아무 물건도 2배를 안한상태)
         itemPtr[x][0] *= 2;
         itemPtr[x][1] *= 2;
 
+        // 0번행과 0번열은 0으로 처리
         for(int i=0 ; i<=max_weight ; i++)
             value[i][0]=0;
         for(int i=0 ; i<=numOfitem ; i++)
             value[0][i]=0;
         valuePtr = make_value_arr(valuePtr,itemPtr,max_weight);
-        // max_value ã��
+        // max_value 찾기
         for(int i=1 ; i<=numOfitem ; i++){
             for(int w=1 ; w<=max_weight ; w++){
                 if(max_value<value[w][i]){
@@ -83,6 +94,7 @@ int main(){
                 }
             }
         }
+        
         if(x==0){
             result[0][0] = max_value;
             result[0][1] = x;
@@ -95,7 +107,8 @@ int main(){
 
         find_item(valuePtr,itemPtr,max_weight,numOfitem);
 
-        // ���󺹱�
+        // 원상복귀 : 다음 수를 2배하여 똑같이 수행 해야하므로 
+        //           현재 수는 다시 2로 나누어 원래값으로 돌려줌
         itemPtr[x][0] /= 2;
         itemPtr[x][1] /= 2;
         for(int i=1 ; i<numOfitem+1 ; i++){
@@ -117,8 +130,10 @@ int main(){
     return 0;
 }
 int* make_value_arr(int (*value)[numOfitem+1], int (*item)[2], int max_weight){
+    // 1번문제에선 메인함수 안에서 처리 했지만
+    // 좀더 이해하기 쉽도록 따로 함수로 만들었다
     for(int i=1 ; i<=numOfitem ; i++){
-        for(int w=1 ; w<=max_weight ; w++){     // w : ���� ������ �ִ� ����
+        for(int w=1 ; w<=max_weight ; w++){     // w : 현재 가능한 최대 무게
             if (item[i][0]<=w){
                 if(item[i][1]+value[w-(item[i][0])][i-1] > value[w][i-1]){
                     value[w][i] = item[i][1] + value[w-(item[i][0])][i-1];
@@ -135,6 +150,8 @@ int* make_value_arr(int (*value)[numOfitem+1], int (*item)[2], int max_weight){
 
 
 void find_item(int (*valuePtr)[numOfitem+1], int (*itemPtr)[2], int weight, int i){
+    // 완성된 value배열에서 최대value에 맞는 물건들을 찾는 과정
+    // 가장 value배열의 가장 끝부터 시작하여 역추적해 나감
     if( valuePtr[weight][i]!=0){
         if( valuePtr[weight][i-1]==valuePtr[weight][i] ){
             find_item(valuePtr, itemPtr, weight, i-1);
@@ -148,6 +165,8 @@ void find_item(int (*valuePtr)[numOfitem+1], int (*itemPtr)[2], int weight, int 
     }
 }
 int save_file(char outfile[], int (*result)[2]){
+    // 1번 문제와 거의 같음
+    // 다른점은 물건을 2배하였다면 몇번물건을 2배 했는지 output file에 write해주는 과정을 추가하였다
     FILE *fp = fopen(outfile,"w");
     if ( !fp ) {
         fprintf(stderr, "cannot open file for write %s\n",outfile);
