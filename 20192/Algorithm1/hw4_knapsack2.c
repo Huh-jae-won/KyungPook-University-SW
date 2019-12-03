@@ -2,6 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+// knapsack problem
+// Dynamic Programming을 활용하는 문제
+// 1번 문제와 조금 다름 : 이문제는 1번문제에서 딱한번 한 물건을 weight를 절반, value도 절반으로 두고 knapsack문제를 푸는것이다
+// 물론 1번문제방식이 가장 큰값이라면 똑같이 출력을 하면됨
+
+// 절반으로 나누면 int형을 못쓰기 때문에 1번 문제에서 double형으로 
 static double result[20][2];
 static int numOfitem;
 int save_file(char outfile[], double (*result)[2]);
@@ -46,7 +52,7 @@ int main(){
     double item[numOfitem+1][2];
     double value[max_weight+1][numOfitem+1];
 
-    // item�迭 ����
+    // item배열 생성
     item[0][0] = 0;
     item[0][1] = 0;
     for(int i=1 ; i<numOfitem+1 ; i++){
@@ -72,7 +78,7 @@ int main(){
         for(int i=0 ; i<=numOfitem ; i++)
             value[0][i]=0;
         valuePtr = make_value_arr(valuePtr,itemPtr,max_weight);
-        // max_value ã��
+        // max_value 찾기
         for(int i=1 ; i<=numOfitem ; i++){
             for(int w=1 ; w<=max_weight ; w++){
                 if(max_value<value[w][i]){
@@ -91,13 +97,13 @@ int main(){
                 result[0][1] = x;
             }
         }
-        // value�迭 ���
+        // value배열 출력
         for(int i=0 ; i<=max_weight ; i++){
             for(int j=0 ; j<=numOfitem ; j++){
             }
         }
         find_item(valuePtr,itemPtr,max_weight,numOfitem);
-        // ���󺹱�
+        // 원상복귀
         itemPtr[x][0] *= 2;
         itemPtr[x][1] *= 2;
         for(int i=1 ; i<numOfitem+1 ; i++){
@@ -118,8 +124,12 @@ int main(){
     return 0;
 }
 double* make_value_arr(double (*value)[numOfitem+1], double (*item)[2], int max_weight){
+    // 1번문제에선 메인함수 안에서 처리 했지만
+    // 좀더 이해하기 쉽도록 따로 함수로 만들었다
+    // 1번 문제와 다른점이 int에서 double형으로 바꾸었다는 것과
+    // 배열의 index가 물건을 반으로 쪼개면 맞지 않기 때문에 135번줄 처럼 해주었더니 index가 딱 맞아 떨어졌다
     for(int i=1 ; i<=numOfitem ; i++){
-        for(int w=1 ; w<=max_weight ; w++){     // w : ���� ������ �ִ� ����
+        for(int w=1 ; w<=max_weight ; w++){     // w : 현재 가능한 최대 무게
             if (item[i][0]<=w){
                 if(item[i][1]+value[w-(int)(item[i][0]+0.5)][i-1] > value[w][i-1]){
                     value[w][i] = item[i][1] + value[w-(int)(item[i][0]+0.5)][i-1];
@@ -142,6 +152,7 @@ void find_item(double (*valuePtr)[numOfitem+1], double (*itemPtr)[2], int weight
         }else if( valuePtr[weight-1][i]==valuePtr[weight][i] ){
             find_item(valuePtr, itemPtr, weight-1,i);
         }else{
+            // 1번 문제와 double형인것만 빼면 동일하다
             result[i][0] = itemPtr[i][0];
             result[i][1] = itemPtr[i][1];
             find_item(valuePtr, itemPtr, weight-itemPtr[i][0], i-1);
@@ -149,6 +160,8 @@ void find_item(double (*valuePtr)[numOfitem+1], double (*itemPtr)[2], int weight
     }
 }
 int save_file(char outfile[], double (*result)[2]){
+    // 1번 문제와 거의 같음
+    // 다른점은 물건을 쪼갰다면 몇번물건을 쪼갰는지 output file에 write해주는 과정을 추가하였다
     FILE *fp = fopen(outfile,"w");
     if ( !fp ) {
         fprintf(stderr, "cannot open file for write %s\n",outfile);
