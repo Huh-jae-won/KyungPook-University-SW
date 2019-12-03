@@ -1,4 +1,4 @@
-// 알고리즘1 수업 과제
+// 알고리즘1 수업 과제3
 /* Binary search tree using doubly-linked lists
  * COMP319 Algorithms, Fall 2019
  * School of Electronics Engineering, Kyungpook National University
@@ -30,6 +30,7 @@
 typedef struct BTNode BTN;
 struct BTNode {
 	// bulk에 key값이 숨겨져 있음
+	// getkey를 통해서만 bulk에서 key값을 꺼낼 수 있음
 	char bulk[BULK_SIZE];	// null character to be added
 	BTN* left, * right;	// binary tree: left and right children
 };
@@ -73,8 +74,7 @@ void free_bt_recursive(BTN* bt);
 BTN* copy_bt_recursive(BTN* bt);
 // return value: pointer to the root of the copy of the given binary tree "bt"
 
-BTN* insert_left_bcnode(
-	BTN* parent, BTN* newPtr);
+BTN* insert_left_bcnode(BTN* parent, BTN* newPtr);
 //  adds a node to the left of a BTNode parent
 //  it will be used to generate a left-half binary tree
 //  (LHBT, all rights are NULL)
@@ -214,7 +214,8 @@ int print_BST_right_center_left(FILE* fp, BTN* bst, int level)
 // 띄우는 칸을 맞춰줘야함
 // outfile에 write
 // Note: key's length is fixed to KEYLENGTH, so there are
-// (KEYLENGTH+1)*level spaces. For examples,
+// (KEYLENGTH+1)*level spaces. 
+// ex)
 //         999
 //     777
 //         555
@@ -285,13 +286,13 @@ int print_BST_1(FILE* fp, BTN* bst, int level)
 int print_BST_2(FILE* fp, BTN* bst, int level, int set[])
 // print_BST_1에서 왼쪽 자식노드를 구분하기 편하도록 |를 추가해줌
 // same as print_BST_1 except vertical line from center to left
+// ex)
 // 100/400/800/900
 //    |       |   +900
 //    |       +800
 //    |           +500/700
 //    +000
 //       static variable can be used as well
-//       You may add additional parameter to the function if necessary
 {
 	/* FILL */
 	int height = level, a = 0, b = 0;
@@ -401,17 +402,19 @@ int find_type(int num,int *left,int *right){
 }
 
 BTN* BST_to_completeBST(BTN* bst, int numNodes, BTN *head)
+// 매개변수로 bst, 노드갯수와 head노드를 받아와
+// 완전이진트리를 구현하는 함수
 {
 	/* FILL */
     BTN *lhbt,*root=NULL,*left,*right,*before;
 	lhbt=NULL;
 	int num_l,num_r,type;
 	if(head==NULL)
-        lhbt = sorting_left(bst, lhbt); // 오름차순인 LHBT를  만듦
+        lhbt = sorting_left(bst, lhbt); // bst를 오름차순인 LHBT를  만듦
     else
         lhbt = bst;
 	root = lhbt;
-	type = find_type(numNodes,&num_l,&num_r);  // numNodes를 이용해 root의 왼쪽트리, 오른쪽트리 갯수를 각각 구함
+	type = find_type(numNodes,&num_l,&num_r);  // numNodes를 이용해 완전이진트리로 구현시 필요한 root의 왼쪽트리, 오른쪽트리 갯수를 각각 구함
 	left=root;
 	if(root!=NULL){
         switch(type){
@@ -423,8 +426,8 @@ BTN* BST_to_completeBST(BTN* bst, int numNodes, BTN *head)
                     root = root->left;
                 }                       // root값
                 right = root->left;
-                before->left=NULL;      // left의 마지막을 NULL로 => root와 연결을 끊음 =>left 완성
-                root->left=NULL;        // right를 root와의 연결을 끊음 => root, right 완성
+                before->left=NULL;      // left의 마지막을 NULL로 => root와 연결을 끊음 =>left(root의 왼쪽트리) 완성
+                root->left=NULL;        // right를 root와의 연결을 끊음 => root, right(root의 오른쪽트리) 완성
                 //left, root, right 완성
                 break;
             case 20 :   // left는 다참, right는 덜참 (둘다 높이 h-1)
@@ -530,6 +533,7 @@ BTN *pivoting(BTN *head,int type[]){
             }
         }else {
             // pivot값이 왼쪽에도 오른쪽에도 들어가는 경우
+	    // type[2]에 들어가 있는 숫자만큼 pivot값과 같은 수를 왼쪽트리에 채워준후 나머지 pivot값과 같은 수는 오른쪽트리에 채움
             find_type(type,&num_l,&num_r);
             if(sign<0 ){ // pivot값 < compare값
                 if(right==NULL){
@@ -585,6 +589,7 @@ BTN* generate_BST_quicksort_basic(BTN* lhbt)
 	return pivot;
 }
 
+// quicktsort를 이용하여 완전이진트리 만들기
 BTN* generate_BST_quicksort_advanced(BTN* lhbt,int numNodes)
 // challenge: try to reduce the height using quick sort algorithm
 {
@@ -598,6 +603,13 @@ BTN* generate_BST_quicksort_advanced(BTN* lhbt,int numNodes)
 	}
 	find_type(numNodes,&num_l,&num_r);
     while(1){
+	// lhbt의 root부터 pivot으로 두고 pviot의 왼쪽트리,오른쪽트리의 노드갯수를 구한다.
+	// find_type함수로 구한 정확한 왼쪽트리,오른쪽트리의 노드갯수와 동일하다면 break를 통하여 while문을 빠져나온다
+	// while문을 빠져 나올 방법 num_l==cnt_l && num_r==cnt_r
+	// while문을 빠져 나올 경우
+	// 1. pivot값과 같은 수를 가진 노드가 없을 경우 -> 단순히 알맞은 pivot에 대하여 quicksorting을 진행
+	// 2. pivot값과 같은 수가 왼쪽 혹은 오른쪽에 들어있는경우 -> pivot값과 같은 값을 가지는 노드가 있는경우 cnt_same을 1증가시켜
+	//    갯수를 파악한후 cnt_l,cnt_r이 num_l,num_r에 맞도록 잘 분배해준다.
         temp=head->left;
         cnt_l=0;
         cnt_r=0;
@@ -666,7 +678,8 @@ BTN* generate_BST_quicksort_advanced(BTN* lhbt,int numNodes)
         head = head->left;
         tail->left=NULL;
     }
-
+    // while문을 빠져 나왔다면
+    // pivot을 잘 정했다는 것이고, pivot에 대하여 quicksorting을 진행한다.
     if(pivot->left!=NULL){
         pivot->left=generate_BST_quicksort_advanced(pivot->left,num_l);
     }
@@ -797,7 +810,9 @@ int main()
 // implementation: functions for binary tree node
 /////////////////////////////////////////////////////////////
 
+
 const char* getkey(BTN* a)
+// bulk에서 key값을 꺼내오는 함수
 {
 	int i;
 	for (i = 0; i < BULK_SIZE - KEYLENGTH; i++) {
@@ -807,6 +822,7 @@ const char* getkey(BTN* a)
 }
 
 int setkey(BTN* a, const char kw[])
+// key값을 setting해주는 함수
 {
 	int pos;
 	if (a != NULL) {
@@ -825,6 +841,7 @@ int setkey(BTN* a, const char kw[])
 }
 
 BTN* generate_btnode(const char kw[])
+// 노드를 생성해주는 함수
 {
 	BTN* tmp;
 
@@ -838,6 +855,7 @@ BTN* generate_btnode(const char kw[])
 }
 
 void free_bt_recursive(BTN* bt)
+// 트리를 free시켜주는 함수
 {
 	if (bt != NULL) {
 		free_bt_recursive(bt->left);
@@ -847,6 +865,7 @@ void free_bt_recursive(BTN* bt)
 }
 
 BTN* copy_bt_recursive(BTN* bt)
+// 트리를 복사하는 함수
 {
 	BTN* dup;
 
