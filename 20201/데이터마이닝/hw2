@@ -1,0 +1,4 @@
+1. RapidMiner Studio를 이용하여 다음을 수행해보고, 그 결과화면 캡쳐하여 LMS로 제출하기
+     (1) 첨부파일의 data를 읽어들여 (import data),
+     (2) 본인의 local repository의 "data"폴더 안에 "hw1"이라는 이름으로 저장하고
+     (3) 그 결과화면 캡쳐
