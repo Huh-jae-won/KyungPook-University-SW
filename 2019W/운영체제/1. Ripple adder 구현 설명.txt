@@ -1,0 +1,30 @@
+[회로설계]
+Ripple-Carry-Adder: 전가산기에서 생긴 올림수를 다음 전가산기에 전파하여 계산하는 가산기이다.
+4비트 ripple carry adder는 전가산기 4개를 이용하여 연산한다. 
+처음 a,b,carry(맨 처음의 캐리값은 0)값을 입력받아서 합과 carry값을 출력하는데, 
+carry값(MAJ의 가장 아랫줄 출력값)은 다음 연산에서 사용되도록 다음 계산부(다음 MAJ의 첫째줄)로 이동된다.
+XOR 과 AND 게이트로 구성되어있으며,  MAJ , UMA 한쌍 당 1bit를 연산할 수 있다.
+우리는 4비트이므로 4쌍이 있다.
+(majority gate, unmajority gate)
+
+
+[실행결과]
+(합만 보려면 오른쪽부터 짝수번째. 맨 마지막 값은 a3와 b3의 연산 후 발생한 캐리값)
+위 실행에서, a0, b0의 값이 (1, 1) 이므로 s0은 0이고, 캐리가 하나 발생한다.
+이 캐리값은 다음 계산부로 넘어가고, a1 b1은 각각 (0, 0)인데, 캐리값이 있으므로 s1은 1이다.
+a2 b2는 각각 (1, 0) 이므로 s2는 1이고
+a3 b3는 각각 (1, 1) 이므로 s3는 0이고, 캐리값이 하나 발생한다.
+이 캐리값은 c로 출력된다. 
+
+
+[참조]
+https://woodforest.tistory.com/122   //반가산기, 전가산기 원리 이해
+https://znz5.tistory.com/2 //ripple-carry-adder 원리이해
+https://forest-benchmarking.readthedocs.io/en/latest/examples/ripple_adder_benchmark.html //ripple-carry-adder 양자회로구현
+https://www.slideshare.net/SnehaRamshanker/classical-computation-to-quantum-computation //기존 논리회로->양자회로 변환 
+https://quantum-computing.ibm.com/login //circuit composer 사진자료
+http://infosec.pusan.ac.kr/wp-content/uploads/2018/09/3주차.pdf //논리회로 사진자료
+
+
+
+ 
