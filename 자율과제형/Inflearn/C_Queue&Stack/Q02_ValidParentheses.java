@@ -8,9 +8,9 @@ public class Q02_ValidParentheses {
 		Q02_ValidParentheses q02 = new Q02_ValidParentheses();
 		String str = "([])]";
 		System.out.println(q02.isValid(str));
-		System.out.println(q02.solve_sol(str));
+		System.out.println(q02.solution(str));
 	}
-	public boolean solve_sol(String s) {
+	public boolean solution(String s) {
 		if(s.length()%2!=0) {
 			return false;
 		}
@@ -47,7 +47,7 @@ public class Q02_ValidParentheses {
 					break;
 
 				
-				default:// open°ýÈ£ °æ¿ì
+				default:// openÂ°Ã½ÃˆÂ£ Â°Ã¦Â¿Ã¬
 					st.push(s.charAt(i));
 					break;
 			}
