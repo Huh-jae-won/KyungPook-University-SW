@@ -29,10 +29,10 @@ public class Q01_MeetingRooms1 {
 		Interval[] arr2 = {in11,in22};
 		
 
-		System.out.println(meeting.solve(arr2));
+		System.out.println(meeting.solution(arr2));
 		
 	}
-	public boolean solve(Interval[] intervals) {
+	public boolean solution(Interval[] intervals) {
 		Arrays.sort(intervals,c);
 		print(intervals);
 		for(int i=0 ; i<intervals.length-1 ; i++) {
