@@ -5,13 +5,13 @@ import java.util.Stack;
 public class Q01_Baseball {
 	public static void main(String[] args) {
 		String[] strs = {"5","-2","4","C","D","9","+","+"};
-//		C : Á¦ÀÏ ÃÖ±Ù°ª »èÁ¦
-//		D : Á¦ÀÏ ÃÖ±Ù°ª 2¹è·Î »ğÀÔ
-//		+ : ÃÖ±Ù 2°³°ªÀÇ ÇÕÀ» »ğÀÔ
+//		C : ì œì¼ ìµœê·¼ê°’ ì‚­ì œ
+//		D : ì œì¼ ìµœê·¼ê°’ 2ë°°ë¡œ ì‚½ì…
+//		+ : ìµœê·¼ 2ê°œê°’ì˜ í•©ì„ ì‚½ì…
 		System.out.println(calPoints(strs));
-//		System.out.println(solve_sol(strs));
+//		System.out.println(solution(strs));
 	}
-	public static int solve_sol(String[] strs) {
+	public static int solution(String[] strs) {
 		Stack<Integer> st = new Stack<>();
 		
 		for(String op : strs) {
