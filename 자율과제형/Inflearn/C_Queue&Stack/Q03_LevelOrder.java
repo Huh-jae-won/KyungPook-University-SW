@@ -26,14 +26,14 @@ public class Q03_LevelOrder {
 		
 		root.right.left = new TreeNode(6);
 //		System.out.println(q03.levelOrder(root));
-		System.out.println(q03.solve_sol(root));
+		System.out.println(q03.solution(root));
 
 	}
 	
 	
 	/////////////////////////////////////////////////////
-	public List<List<Integer>> solve_sol(TreeNode root){
-		// Queue »ç¿ë -> bfs
+	public List<List<Integer>> solution(TreeNode root){
+		// Queue Â»Ã§Â¿Ã« -> bfs
 		List<List<Integer>> ret = new ArrayList<>();
 		 Queue<TreeNode> q = new LinkedList<>();
 		 q.offer(root);
@@ -74,7 +74,7 @@ public class Q03_LevelOrder {
 		}
 		return ret;
 	}
-	// º»ÀÎ, ÁÂ, ¿ì -> ÀÚ½ÄÀ¸·Î
+	// ÂºÂ»Ã€ÃŽ, ÃÃ‚, Â¿Ã¬ -> Ã€ÃšÂ½Ã„Ã€Â¸Â·ÃŽ
 	private void place(TreeNode[] arr, TreeNode node, int indx){
 		arr[indx] = node;
 		if(node.left!=null) {
